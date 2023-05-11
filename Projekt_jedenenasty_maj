@@ -1,0 +1,50 @@
+//wersja lcd + led
+#include <LCD_I2C.h>
+
+LCD_I2C lcd(0x3F, 16, 2);
+
+int dioda = 3;
+
+int wypelnienie = 0;
+int zmiana = 5;
+
+void setup() {
+  for(dioda; dioda < 11; ++dioda){
+    pinMode(dioda, OUTPUT);
+  }
+  lcd.begin();
+  lcd.backlight();
+  lcd.clear();
+  //pinMode(dioda_a, OUTPUT);
+}
+
+void loop() {
+  lcd.clear();
+  for(dioda = 3; dioda < 11; ++dioda){
+    analogWrite(dioda, wypelnienie);
+  }
+
+  lcd.setCursor(0, 0);
+  lcd.print("Poziom:");
+  lcd.setCursor(8, 0);
+  lcd.print(wypelnienie);
+  lcd.setCursor(0,1);
+    if(wypelnienie < 64){
+      lcd.print("****");
+    }else if(wypelnienie > 64 && wypelnienie < 128 ){
+      lcd.print("********");  
+    }else if(wypelnienie > 128 && wypelnienie < 192){
+      lcd.print("************");
+    }else if(wypelnienie > 192 && wypelnienie < 255){
+      lcd.print("****************");
+    }
+  delay(500);
+  
+  if(wypelnienie < 255){
+      wypelnienie = wypelnienie + zmiana;
+    } else {
+      wypelnienie = 0;
+      }
+  delay(500);
+ 
+}
