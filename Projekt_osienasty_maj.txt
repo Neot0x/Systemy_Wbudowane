@@ -1,0 +1,21 @@
+int stan = 0;
+int dioda = 3;
+
+void setup() {
+  pinMode(A4, INPUT);
+  
+  for(dioda; dioda < 12; ++dioda){
+    pinMode(dioda, OUTPUT);
+  }
+}
+
+void loop() {
+  for(dioda = 3; dioda < 12; ++dioda){
+    analogWrite(dioda, HIGH);
+  }
+  
+  stan = analogRead(A4);
+  Serial.begin(9600);
+  Serial.println(stan);
+  delay(1000);
+}
