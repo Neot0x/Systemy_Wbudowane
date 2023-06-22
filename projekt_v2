@@ -1,0 +1,66 @@
+#include <LCD_I2C.h>
+
+LCD_I2C lcd(0x3F, 16, 2); 
+
+long odleglosc, duration;
+
+void setup()
+{
+  
+    for(int dioda = 3; dioda < 12; ++dioda){
+      pinMode(dioda, OUTPUT);
+    }
+
+    pinMode(A2, OUTPUT);
+    pinMode(A1, INPUT);
+    
+    lcd.begin(); 
+    lcd.backlight();
+    for(int i = 4; i < 14; ++i){
+      pinMode(i, OUTPUT);
+    }
+}
+
+void loop() {
+      pinMode(A2, OUTPUT);
+      digitalWrite(A2, LOW);
+      delayMicroseconds(2);
+      digitalWrite(A2, HIGH);
+      delayMicroseconds(10);
+      digitalWrite(A2, LOW);
+      pinMode(A2, INPUT);
+      
+      duration = pulseIn(A1, HIGH);
+      odleglosc = microsecondsToCentimeters(duration);
+
+      if(odleglosc > 0 && odleglosc <= 5){
+          digitalWrite(3, HIGH);
+          for(int dioda = 4; dioda < 12; dioda++){
+              digitalWrite(dioda, LOW);
+            }
+            delay(1000);
+          }   
+        else if(odleglosc > 5 && odleglosc <= 10){
+          digitalWrite(4, HIGH);
+          for(int dioda = 5; dioda < 12; dioda++){
+              digitalWrite(dioda, LOW);
+            }
+            delay(1000);
+        
+          
+        }else if(odleglosc > 10 && odleglosc <= 15){
+        }
+      
+      lcd.setCursor(0, 0);
+      lcd.print(odleglosc);
+      delay(1000);
+      lcd.print("                ");
+      
+      /*for(int dioda = 3; dioda < 12; ++dioda){
+        digitalWrite(dioda, LOW);*/
+      
+}
+
+long microsecondsToCentimeters(long microseconds) {
+   return microseconds / 29 / 2;
+}
