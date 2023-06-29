@@ -1,19 +1,23 @@
 #include <LCD_I2C.h>
 
+// konfiguorwanie wyświetlacza LCD
 LCD_I2C lcd(0x3F, 16, 2); 
 
+// deklaracja zmiennych potrzebnych do obliczeń odległości
 long odleglosc, duration;
 
 void setup()
 {
-  
+    //ustawianie pinów do diod LED jako wyjścia 
     for(int dioda = 3; dioda < 12; ++dioda){
       pinMode(dioda, OUTPUT);
     }
 
-    pinMode(A2, OUTPUT);
-    pinMode(A1, INPUT);
-    
+    //ustawianie pinów analogowych do obsługi sensora ultradźwiękowego HCSR04
+    pinMode(A2, OUTPUT);  //ustawienie pinu A2 jako wyjście, połączony z pinem trigger sensora
+    pinMode(A1, INPUT);   //ustawienie pinu A1 jako wejście, połączony z pinem echo sensora
+
+    //włączenie wyświetlacza LCD i ustawienie podświedlania 
     lcd.begin(); 
     lcd.backlight();
     for(int i = 4; i < 14; ++i){
@@ -22,17 +26,19 @@ void setup()
 }
 
 void loop() {
+      //generowanie impulsu prostokątnego do wejścia Trigger sensora
       pinMode(A2, OUTPUT);
-      digitalWrite(A2, LOW);
+      digitalWrite(A2, LOW); //ustawienie stanu niskiego na 10 us
       delayMicroseconds(2);
-      digitalWrite(A2, HIGH);
+      digitalWrite(A2, HIGH); //ustawienie stanu wysokiego na 10 us
       delayMicroseconds(10);
       digitalWrite(A2, LOW);
       pinMode(A2, INPUT);
       
-      duration = pulseIn(A1, HIGH);
-      odleglosc = microsecondsToCentimeters(duration);
+      duration = pulseIn(A1, HIGH);  //mierzenie czasu impulsu w mikrosekundach
+      odleglosc = microsecondsToCentimeters(duration); //obliczanie odległości w centymentrach
 
+      //Fragment sterowania diodami LED
       if(odleglosc > 0 && odleglosc <= 5){
           digitalWrite(3, HIGH);
           for(int dioda = 4; dioda < 12; dioda++){
@@ -99,13 +105,14 @@ void loop() {
           delay(1000);
       }
 
-      lcd.setCursor(0, 0);
-      lcd.print(odleglosc);
+      lcd.setCursor(0, 0);    //Ustawienie pozycji kursora na 
+      lcd.print(odleglosc);   //Wyświetlenie odległości
       delay(1000);
-      lcd.print("                ");
+      lcd.print("                ");  //Wyczyszczenie wyświetlanych danych
       
 }
 
+//funkcja obliczająca odległość na podstawie mikrosekund
 long microsecondsToCentimeters(long microseconds) {
    return microseconds / 29 / 2;
 }
