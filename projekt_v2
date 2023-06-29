@@ -40,17 +40,63 @@ void loop() {
             }
             delay(1000);
           }   
-        else if(odleglosc > 5 && odleglosc <= 10){
+      else if(odleglosc > 5 && odleglosc <= 10){
           digitalWrite(4, HIGH);
           for(int dioda = 5; dioda < 12; dioda++){
               digitalWrite(dioda, LOW);
             }
             delay(1000);
-        
-          
-        }else if(odleglosc > 10 && odleglosc <= 15){
+          }
+      else if(odleglosc > 10 && odleglosc <= 15){
+          digitalWrite(5, HIGH);
+          for(int dioda = 6; dioda < 12; dioda++){
+              digitalWrite(dioda, LOW);
+            }
+            delay(1000);
         }
-      
+      else if(odleglosc > 15 && odleglosc <= 20){
+          digitalWrite(6, HIGH);
+          for(int dioda = 7; dioda < 12; dioda++){
+              digitalWrite(dioda, LOW);
+            }
+            delay(1000);
+        }
+      else if(odleglosc > 20 && odleglosc <= 25){
+          digitalWrite(7, HIGH);
+          for(int dioda = 8; dioda < 12; dioda++){
+              digitalWrite(dioda, LOW);
+            }
+            delay(1000);
+        }
+      else if(odleglosc > 25 && odleglosc <= 30){
+          digitalWrite(8, HIGH);
+          for(int dioda = 9; dioda < 12; dioda++){
+              digitalWrite(dioda, LOW);
+            }
+            delay(1000);
+        }
+      else if(odleglosc > 30 && odleglosc <= 35){
+          digitalWrite(9, HIGH);
+          for(int dioda = 10; dioda < 12; dioda++){
+              digitalWrite(dioda, LOW);
+            }
+            delay(1000);
+        }
+      else if(odleglosc > 35 && odleglosc <= 40){
+          digitalWrite(10, HIGH);
+          for(int dioda = 11; dioda < 12; dioda++){
+              digitalWrite(dioda, LOW);
+            }
+            delay(1000);
+        }
+      else if(odleglosc > 15 && odleglosc <= 20){
+          digitalWrite(11, HIGH);
+          for(int dioda = 7; dioda < 12; dioda++){
+              digitalWrite(dioda, LOW);
+            }
+            delay(1000);
+        }
+
       lcd.setCursor(0, 0);
       lcd.print(odleglosc);
       delay(1000);
