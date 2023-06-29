@@ -89,21 +89,20 @@ void loop() {
             }
             delay(1000);
         }
-      else if(odleglosc > 15 && odleglosc <= 20){
+      else if(odleglosc > 40 && odleglosc <= 45){
           digitalWrite(11, HIGH);
-          for(int dioda = 7; dioda < 12; dioda++){
-              digitalWrite(dioda, LOW);
-            }
-            delay(1000);
+          digitalWrite(12, LOW);
+          delay(1000);
         }
+      else if(odleglosc > 45){
+          digitalWrite(12, HIGH);
+          delay(1000);
+      }
 
       lcd.setCursor(0, 0);
       lcd.print(odleglosc);
       delay(1000);
       lcd.print("                ");
-      
-      /*for(int dioda = 3; dioda < 12; ++dioda){
-        digitalWrite(dioda, LOW);*/
       
 }
 
