@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        
+        <video src="Zaskocze_profesora.mp4" autoplay id = "film"></video>
+        </br>
+        <button onclick="graj();">Odtwórz</button>
+        <button onclick="pauza();">Pauza</button>
+        <button onclick="cofnij();">Zatrzymaj i cofnij</button>
+        <button onclick="powtorz();">Powtarzaj</button>
+        <button onclick="skip();">Przesuń o 5 sekund w przód</button>
+        <button onclick="rewind();">Przesuń o 5 sekund w tył</button>
+        <button onclick="los();">Przesuń losowo</button>
+        <script>
+            var x = document.getElementById("film");
+            function graj(){
+                x.play();
+            }
+
+            function pauza(){
+                x.pause();
+            }
+
+            function cofnij(){
+                x.repeat();
+            }
+
+            function powtorz(){
+                
+            }
+
+            function skip(){
+
+            }
+
+            function rewind(){
+
+            }
+
+            function los(){
+
+            }
+
+        </script>
+    </body>
+</html>
